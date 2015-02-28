@@ -30,7 +30,7 @@ def main():
         import jldssdp.do_checks #@UnusedImport
         
         parser=argparse.ArgumentParser(description=DESC, fromfile_prefix_chars='@')
-        parser.add_argument('-i',  dest='interface',  type=str, help="Input interface")        
+        #parser.add_argument('-i',  dest='interface',  type=str, help="Input interface")        
         
         args=parser.parse_args()
         

@@ -14,7 +14,7 @@ Overview
 
 Collection of SSDP related scripts
 
-* jldssdp-discover:  listen for SSDP nodes
+* jldssdp-discover:  listen for SSDP NOTIFY messages
 """
 
 
