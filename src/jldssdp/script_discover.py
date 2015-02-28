@@ -23,6 +23,7 @@ class SSDP(DatagramProtocol):
     
     INTERESTING_TOKENS = ['location', 'server', 'nt', 'usn']
     
+    
     def startProtocol(self):
         """
         Called after protocol has started listening.
@@ -56,9 +57,8 @@ class SSDP(DatagramProtocol):
             if not self.is_notify(lines):
                 return
             
-            entry = self.keep_interesting_entries(lines)
+            entry = self.keep_interesting_tokens(lines)
             
-            #logging.info("Entry:\n %s" % entry)
             print json.dumps( entry )
 
         except:
@@ -74,7 +74,7 @@ class SSDP(DatagramProtocol):
         return first_token == "notify"
 
 
-    def keep_interesting_entries(self, lines):
+    def keep_interesting_tokens(self, lines):
         
         r = {}
         
