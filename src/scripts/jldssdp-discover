@@ -30,13 +30,12 @@ def main():
         import jldssdp.do_checks #@UnusedImport
         
         parser=argparse.ArgumentParser(description=DESC, fromfile_prefix_chars='@')
-        parser.add_argument('-ps', dest='sock_pub',  type=str, help="Socket for publishers", required=True)        
-        parser.add_argument('-ss', dest='sock_sub',  type=str, help="Socket for subscribers", required=True)
+        parser.add_argument('-i',  dest='interface',  type=str, help="Input interface")        
         
         args=parser.parse_args()
         
-        from jldzeromq.tools_sys import dnorm, info_dump
-        from jldzeromq.script_fabric import run
+        from jldssdp.tools_sys import dnorm, info_dump
+        from jldssdp.script_discover import run
         
         args=dnorm(vars(args))
         info_dump(args, 20)       
@@ -44,7 +43,7 @@ def main():
 
 
     except KeyboardInterrupt:
-        logging.info("..Exiting")
+        logging.info("... exiting")
         sys.exit(0)##no probs
         
     except Exception,e:
