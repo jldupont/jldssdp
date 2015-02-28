@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+"""
+    SSDP Discover
+    
+    @author: Jean-Lou Dupont
+"""
+__version__="0.1"
+import os, sys, argparse
+op=os.path
+
+try:
+    import jldssdp #@UnusedImport
+except:
+    ### must be in dev mode then    
+    this_dir=op.dirname(__file__)
+    lib_path=op.abspath(op.join(this_dir, ".."))
+    sys.path.insert(0, lib_path)
+    import jldssdp #@UnusedImport
+
+########################################################################
+
+DESC="SSDP Discover - version %s" % __version__
+DEFAULTS={
+          }
+
+def main():
+    try:
+        import jldssdp.do_setup #@UnusedImport
+        import logging
+        import jldssdp.do_checks #@UnusedImport
+        
+        parser=argparse.ArgumentParser(description=DESC, fromfile_prefix_chars='@')
+        parser.add_argument('-ps', dest='sock_pub',  type=str, help="Socket for publishers", required=True)        
+        parser.add_argument('-ss', dest='sock_sub',  type=str, help="Socket for subscribers", required=True)
+        
+        args=parser.parse_args()
+        
+        from jldzeromq.tools_sys import dnorm, info_dump
+        from jldzeromq.script_fabric import run
+        
+        args=dnorm(vars(args))
+        info_dump(args, 20)       
+        run(**args)
+
+
+    except KeyboardInterrupt:
+        logging.info("..Exiting")
+        sys.exit(0)##no probs
+        
+    except Exception,e:
+        logging.error(str(e))
+        sys.exit(1)
+        
+
+sys.exit(main())
