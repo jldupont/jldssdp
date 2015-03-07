@@ -6,7 +6,7 @@
     @author: jldupont
 """
 __author__  ="Jean-Lou Dupont"
-__version__ ="0.1"
+__version__ ="0.2"
 
 DESC="""
 Overview
@@ -15,6 +15,7 @@ Overview
 Collection of SSDP related scripts
 
 * jldssdp-discover:  listen for SSDP NOTIFY messages
+* jldssdp-notify:    send SSDP NOTIFY message, optionally in a loop with delay
 """
 
 
@@ -27,14 +28,15 @@ setup(name=         'jldssdp',
       description=  'Collection of SSDP related tools',
       author=       __author__,
       author_email= 'jl@jldupont.com',
-      #url=          'http://www.systemical.com/doc/opensource/jldzeromq',
+      url=          'https://github.com/jldupont/jldssdp',
       package_dir=  {'': "src",},
       packages=     find_packages("src"),
-      scripts=      ['src/scripts/jldssdp-discover',
+      scripts=      ['src/scripts/jldssdp-discover'
+                     ,'src/scripts/jldssdp-notify',
                      ],
       zip_safe=False
       ,long_description=DESC
-      ,install_requires=[ "argparse", "twisted",
+      ,install_requires=[ "argparse", "twisted", "netifaces"
                          ]
       )
 
