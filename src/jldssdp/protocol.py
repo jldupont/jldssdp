@@ -85,6 +85,9 @@ class SSDP(DatagramProtocol, object):
             
             entry = self.keep_interesting_tokens(lines)
             
+            entry['host'] = host
+            entry['port'] = port
+             
             print json.dumps( entry )
 
         except:
